@@ -1,6 +1,7 @@
 import React from "react";
 import { FaRegTrashAlt } from "react-icons/fa";
-export default function List({ items }) {
+
+export default function List({ items, deleteItem }) {
   return (
     <div>
       <ul>
@@ -8,7 +9,13 @@ export default function List({ items }) {
           return (
             <li key={idx} style={{ backgroundColor: "yellowgreen" }}>
               {item}
-              <FaRegTrashAlt onClick={deleteItem} />
+              <p
+                onClick={() => {
+                  deleteItem(idx);
+                }}
+              >
+                <FaRegTrashAlt />
+              </p>
             </li>
           );
         })}
