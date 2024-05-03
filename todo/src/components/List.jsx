@@ -8,14 +8,15 @@ export default function List({ items, deleteItem }) {
         {items.map((item, idx) => {
           return (
             <li key={idx} style={{ backgroundColor: "yellowgreen" }}>
+              <input type="checkbox" />
               {item}
-              <p
+              <span
                 onClick={() => {
                   deleteItem(idx);
                 }}
               >
                 <FaRegTrashAlt />
-              </p>
+              </span>
             </li>
           );
         })}
