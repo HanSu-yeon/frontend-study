@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddTodo from "../AddTodo/AddTodo";
 // import { FaRegTrashAlt } from "react-icons/fa";
 
 export default function TodoList() {
@@ -7,6 +8,11 @@ export default function TodoList() {
     { idx: "1", text: "item2", status: "active" },
   ]);
 
+  const handleAdd = (todo) => {
+    //새로운 투두를 todos에 업데이트
+    console.log(todo);
+    setTodos([...todos, todo]);
+  };
   return (
     <section>
       <ul>
@@ -14,6 +20,8 @@ export default function TodoList() {
           return <li key={item.idx}>{item.text}</li>;
         })}
       </ul>
+      {/* 등록되면 콜백함수 호출 */}
+      <AddTodo onAdd={handleAdd} />
     </section>
   );
 }
