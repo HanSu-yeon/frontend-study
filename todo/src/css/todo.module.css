@@ -1,0 +1,7 @@
+.tab {
+  display: flex;
+}
+.tab p {
+  padding: 5px;
+  cursor: pointer;
+}
