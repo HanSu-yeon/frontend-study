@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AddTodo from "../AddTodo/AddTodo";
 import Todo from "../Todo/Todo";
-
+import styles from "./TodoList.module.css";
 export default function TodoList({ filter }) {
   const [todos, setTodos] = useState([
     { idx: "0", text: "item1", status: "active" },
@@ -22,8 +22,8 @@ export default function TodoList({ filter }) {
   //선택한 필터에 해당하는 todo만 들어있음
   const filtered = getFilteredItems(todos, filter);
   return (
-    <section>
-      <ul>
+    <section className={styles.container}>
+      <ul className={styles.list}>
         {filtered.map((item) => {
           return (
             <Todo
