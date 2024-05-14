@@ -4,50 +4,27 @@ import Todo from "../Todo/Todo";
 import styles from "./TodoList.module.css";
 
 export default function TodoList({ filter }) {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => readTodosFromLocalStorage());
 
   const handleAdd = (todo) => {
-    //새로운 투두를 todos에 업데이트
-    let todosString = localStorage.getItem("todos");
-    let todosArr = JSON.parse(todosString);
-    todosArr.push(todo);
-    localStorage.setItem("todos", JSON.stringify(todosArr));
     setTodos([...todos, todo]);
     // console.log(todosArr);
   };
 
   //check여부
   const handleUpdate = (updated) => {
-    const updateTodo = todos.map((t) => (t.idx === updated.idx ? updated : t));
-    localStorage.setItem("todos", JSON.stringify(updateTodo));
-
-    setTodos(updateTodo);
+    setTodos(todos.map((t) => (t.idx === updated.idx ? updated : t)));
   };
 
   const handleDelete = (deleted) => {
-    let todosString = localStorage.getItem("todos");
-    let todosArr = JSON.parse(todosString);
-    // setTodos(todos.filter((t) => t.idx !== deleted.idx));
-    const deleteTodo = todosArr.filter((t) => t.idx !== deleted.idx);
-    console.log(deleteTodo);
-    localStorage.setItem("todos", JSON.stringify(deleteTodo));
-    setTodos(deleteTodo);
+    setTodos(deleted.filter((t) => t.idx !== deleted.idx));
   };
   //선택한 필터에 해당하는 todo만 들어있음
   const filtered = getFilteredItems(todos, filter);
 
   useEffect(() => {
-    const todoString = localStorage.getItem("todos");
-
-    if (todoString == null) {
-      //key :value 저장
-      const initTodo = [];
-      localStorage.setItem("todos", JSON.stringify(initTodo));
-    } else {
-      const todosArr = JSON.parse(todoString);
-      setTodos([...todosArr]);
-    }
-  }, []);
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   return (
     <section className={styles.container}>
@@ -67,6 +44,12 @@ export default function TodoList({ filter }) {
       <AddTodo onAdd={handleAdd} />
     </section>
   );
+}
+
+function readTodosFromLocalStorage() {
+  console.log("readTodosFromLocalStorage");
+  const todos = localStorage.getItem("todos");
+  return todos ? JSON.parse(todos) : [];
 }
 
 function getFilteredItems(todos, filter) {
