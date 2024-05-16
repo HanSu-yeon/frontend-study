@@ -10,14 +10,13 @@ export default function TodoList({ filter }) {
     setTodos([...todos, todo]);
     // console.log(todosArr);
   };
-
   //check여부
   const handleUpdate = (updated) => {
     setTodos(todos.map((t) => (t.idx === updated.idx ? updated : t)));
   };
 
   const handleDelete = (deleted) => {
-    setTodos(deleted.filter((t) => t.idx !== deleted.idx));
+    setTodos(todos.filter((t) => t.idx !== deleted.idx));
   };
   //선택한 필터에 해당하는 todo만 들어있음
   const filtered = getFilteredItems(todos, filter);
