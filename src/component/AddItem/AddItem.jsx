@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AddItem({ addTodo }) {
   const [text, setText] = useState("");
@@ -13,7 +14,7 @@ export default function AddItem({ addTodo }) {
       setText("");
       return;
     }
-    addTodo({ id: 3, text: text, status: "active" });
+    addTodo({ id: uuidv4(), text: text, status: "active" });
     setText("");
   };
 
