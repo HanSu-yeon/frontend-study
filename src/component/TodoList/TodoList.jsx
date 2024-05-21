@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AddItem from "../AddItem/AddItem";
 
 export default function TodoList() {
   const [todos, setTodos] = useState([
@@ -16,6 +17,7 @@ export default function TodoList() {
           <li>{todo.text}</li>
         ))}
       </ul>
+      <AddItem addTodo={addTodo} />
     </div>
   );
 }
