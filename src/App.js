@@ -1,7 +1,12 @@
 import "./App.css";
+import TodoList from "./component/TodoList/TodoList";
 
 function App() {
-  return <></>;
+  return (
+    <>
+      <TodoList />
+    </>
+  );
 }
 
 export default App;
