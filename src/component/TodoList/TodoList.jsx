@@ -11,12 +11,19 @@ export default function TodoList() {
   const addTodo = (todo) => {
     setTodos([...todos, todo]);
   };
-
+  const updateTodo = () => {};
+  const deleteTodo = (delTodo) => {
+    setTodos(
+      todos.filter((todo) => {
+        return todo.id !== delTodo.id;
+      })
+    );
+  };
   return (
     <div>
       <ul>
         {todos.map((todo) => (
-          <Todo todo={todo} />
+          <Todo todo={todo} onDelTodo={deleteTodo} onUpdateTodo={updateTodo} />
         ))}
       </ul>
       <AddItem addTodo={addTodo} />
