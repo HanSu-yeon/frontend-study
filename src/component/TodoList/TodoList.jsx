@@ -11,14 +11,23 @@ export default function TodoList() {
   const addTodo = (todo) => {
     setTodos([...todos, todo]);
   };
-  const updateTodo = () => {};
-  const deleteTodo = (delTodo) => {
+
+  const updateTodo = (updated) => {
     setTodos(
-      todos.filter((todo) => {
-        return todo.id !== delTodo.id;
+      todos.map((todo) => {
+        return todo.id === updated.id ? updated : todo;
       })
     );
   };
+
+  const deleteTodo = (deleted) => {
+    setTodos(
+      todos.filter((todo) => {
+        return todo.id !== deleted.id;
+      })
+    );
+  };
+
   return (
     <div>
       <ul>
