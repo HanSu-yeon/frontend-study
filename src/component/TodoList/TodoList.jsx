@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AddItem from "../AddItem/AddItem";
 import Todo from "../Todo/Todo";
 
-export default function TodoList() {
+export default function TodoList({ filter }) {
   const [todos, setTodos] = useState([
     { id: 1, text: "아이템1", status: "active" },
     { id: 2, text: "아이템2", status: "active" },
@@ -28,14 +28,25 @@ export default function TodoList() {
     );
   };
 
+  //필터링된 할 일 목록
+  const filteredList = getFilteredItem(todos, filter);
+
   return (
-    <div>
+    <section>
       <ul>
-        {todos.map((todo) => (
+        {filteredList.map((todo) => (
           <Todo todo={todo} onDelTodo={deleteTodo} onUpdateTodo={updateTodo} />
         ))}
       </ul>
       <AddItem addTodo={addTodo} />
-    </div>
+    </section>
   );
+}
+
+function getFilteredItem(todos, filter) {
+  if (filter === "all") {
+    return todos;
+  } else {
+    return todos.filter((todo) => todo.status === filter);
+  }
 }
